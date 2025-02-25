@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- NAVBAR -->
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -8,21 +7,20 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="home.html">Anasayfa</a></li>
-          <li><a href="profile.html">Profil</a></li>
-          <li><a href="#">Çıkış Yap</a></li>
+
         </ul>
       </div>
     </nav>
 
-    <!-- MAIN -->
     <main class="container">
       <div class="row">
+        <!-- Sol Sidebar (Profil + Arkadaş İstekleri) -->
         <div class="col-md-3">
-          <!-- Profile Brief -->
+
           <div class="panel panel-default">
             <div class="panel-body">
               <h4>Hoş Geldin</h4>
-             <a href="profile.html">
+              <a href="profile.html">
                 <img 
                   src="./assets/img/ben.jpg" 
                   alt="Makbule Nur GÜLEÇ" 
@@ -32,7 +30,8 @@
               <p>Makbule Nur GÜLEÇ</p>
             </div>
           </div>
-          <!-- Arkadaş İstekleri: Import edilen bileşeni kullanıyoruz -->
+
+
           <ArkadasIstekleri />
         </div>
 
@@ -55,7 +54,9 @@
             </div>
           </form>
           <hr />
-          <!-- Feed -->
+          
+
+
           <div>
             <div
               class="panel panel-default"
@@ -67,76 +68,78 @@
               </div>
               <div class="panel-footer">
                 <span>
-                  posted 2017-5-27 20:45:01 by nicholaskajoh
+                  Makbule Nur GÜLEÇ tarafından gönderildi
                 </span>
                 <span class="pull-right">
-                  <a class="text-danger" href="#" @click.prevent="deletePost(index)">[delete]</a>
+                  <button class="btn btn-sm btn-danger" @click.prevent="deletePost(index)">Sil</button>
                 </span>
               </div>
             </div>
           </div>
         </div>
 
+
         <div class="col-md-3">
-          <!-- Add Friend -->
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <h4>Arkadaş Önerileri</h4>
-              <ul>
-                <li>
-                  <a href="#">alberte</a>
-                  <a href="#">[add]</a>
-                </li>
-              </ul>
-            </div>
-          </div>         
+          <ArkadasOnerileri />
         </div>
       </div>
     </main>
 
-    <!-- FOOTER -->
     <footer class="container text-center">
-      <ul class="nav nav-pills pull-right">
-      </ul>
+      <ul class="nav nav-pills pull-right"></ul>
     </footer>
   </div>
 </template>
 
 <script>
-// ArkadasIstekleri bileşeni import ediliyor
 import ArkadasIstekleri from './components/ArkadasIstekleri.vue';
+import ArkadasOnerileri from './components/ArkadasOnerileri.vue';
 
 export default {
   name: 'App',
   components: {
-    // Bileşeni components içine ekleyerek kullanıma hazır hale getiriyoruz
-    ArkadasIstekleri
+    ArkadasIstekleri,
+    ArkadasOnerileri
   },
   data() {
     return {
       postContent: '',
-      posts: ['Hello people! This is my first FaceClone post. Hurray!!!']
-    }
+      posts: ['İlk Yorum']
+    };
   },
   methods: {
     post() {
       if (this.postContent.trim() !== '') {
-        this.posts.push(this.postContent.trim())
-        this.postContent = ''
+        this.posts.push(this.postContent.trim());
+        this.postContent = '';
       }
     },
     deletePost(index) {
-      this.posts.splice(index, 1)
+      this.posts.splice(index, 1);
     }
   }
-}
+};
 </script>
 
 <style>
 .profil-resim {
   width: 100px;
-  height: auto;
-  margin-bottom: 10px;
-  align-center:
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto;
+  display: block;
+  border: 2px solid #ddd;
+}
+
+.panel-body {
+  text-align: center;
+}
+
+.panel-body p {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-top: 8px;
 }
 </style>
